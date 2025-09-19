@@ -39,7 +39,8 @@
     {/each}
   </select>
 </div>
-<div on:click={toggle} on:mouseenter={show} on:mouseleave={hide}>
+<!-- svelte-a11y-ignore a11y-click-events-have-key-events -->
+<div on:click={toggle} on:mouseenter={show} on:mouseleave={hide} on:keydown={()=>{}}>
   {@html civdesc}
 </div>
 <div class="popup-outer">
