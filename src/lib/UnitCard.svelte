@@ -49,9 +49,7 @@
     /* there's an extra 4px height coming from somewhere! */
     height: 32px;
   }
-  .box-container {
-    display: flex;
-  }
+  
   .wbox {
     flex: 1;
     height: 5px;
