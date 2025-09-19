@@ -7,19 +7,19 @@
   <div>{info.info_list[info_index].name}</div>
   <div class="cost-outer">
     {#if typeof info.info_list[info_index].Cost.Wood !== "undefined"}
-      <img src="https://aoe2techtree.net/img/wood.png">
+      <img src="https://aoe2techtree.net/img/wood.png" alt="wood">
       <span class="cost">{info.info_list[info_index].Cost.Wood}</span>
     {/if}
     {#if typeof info.info_list[info_index].Cost.Food !== "undefined"}
-      <img src="https://aoe2techtree.net/img/food.png">
+      <img src="https://aoe2techtree.net/img/food.png" alt="food">
       <span class="cost">{info.info_list[info_index].Cost.Food}</span>
     {/if}
     {#if typeof info.info_list[info_index].Cost.Gold !== "undefined"}
-      <img src="https://aoe2techtree.net/img/gold.png">
+      <img src="https://aoe2techtree.net/img/gold.png" alt="gold">
       <span class="cost">{info.info_list[info_index].Cost.Gold}</span>
     {/if}
     {#if typeof info.info_list[info_index].Cost.stone !== "undefined"}
-      <img src="https://aoe2techtree.net/img/stone.png">
+      <img src="https://aoe2techtree.net/img/stone.png" alt="stone">
       <span class="cost">{info.info_list[info_index].Cost.stone}</span>
     {/if}
   </div>
