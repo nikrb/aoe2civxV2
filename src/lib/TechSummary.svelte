@@ -3,7 +3,6 @@
   export let display_units, display_techs;
   // not bothering with dock atm
   const buildings = ["archery", "barracks", "stable", "workshop", "monastery", "eco", "defense"];
-  console.log("TechSummary - display units:", display_units);
 </script>
 
 {#each buildings as building}
