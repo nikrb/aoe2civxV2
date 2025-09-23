@@ -3,7 +3,7 @@
 </script>
 
 
-<div class="outer">
+<div class="outer" >
   <div>{info.info_list[info_index].name}</div>
   <div class="cost-outer">
     {#if typeof info.info_list[info_index].Cost.Wood !== "undefined"}
@@ -53,7 +53,13 @@
 
 <style>
   .outer {
-    margin: 5px;
+	/* position: absolute;
+	bottom: 2rem;
+	background: #222;
+	color: white;
+	padding: 6px;
+	border-radius: 4px;
+	z-index: 1000; */
   }
   .cost-outer {
     display: flex;

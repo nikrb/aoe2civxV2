@@ -3,6 +3,8 @@
   export let info;
   let show_info = false;
   let info_index = 0;
+  let image_bounds;
+  let bottom_pos = 0;
 
   const show = (i) => { show_info = true; info_index = i; };
   const hide = () => show_info = false;
@@ -12,32 +14,71 @@
              info.info_type.replace(/\S/, (s)=>s.toUpperCase())+'s/'+
              info.info_list[info.info_list.length-1].id+
              '.png';
+
+	function handleStart(event) {
+		image_bounds = event.target.getBoundingClientRect();
+		bottom_pos = image_bounds.top;
+		console.log("bottom_pos", bottom_pos);
+		handleMove(event);
+	}
+	function getXOffset(event) {
+		let offsetX;
+		if( event.touches) {
+			offsetX = event.touches[0].clientX - image_bounds.left;
+		} else {
+			offsetX = event.clientX - image_bounds.left;
+		}
+		return offsetX;
+	}
+	function handleMove(event) {
+		if(!image_bounds) return;
+		const offsetX = getXOffset(event);
+		const index = Math.min(
+			info.info_list.length - 1,
+			Math.max(
+				0, 
+				Math.floor((offsetX / image_bounds.width) * info.info_list.length)
+			)
+		);
+		show(index);
+	}
+	function handleEnd(event) {
+		hide();
+		image_bounds = null;
+	}
 </script>
 
 <div class="col">
-<div class="popup-container">
-  <div class="icons">
-    <img src="{'https://aoe2techtree.net/img/'+
-             info.info_type.replace(/\S/, (s)=>s.toUpperCase())+'s/'+
-             info.info_list[info.info_list.length-1].id+
-             '.png' }"
-             alt="unit pic">
-  </div>
-  <div class="row">
-    {#each Array(info.available) as _, i}
-      <div class="wbox"
-        on:mouseenter={() => show(i)}
-        on:mouseleave={hide}
-        >
-      </div>
-    {/each}
-    {#if show_info}
-      <div class="popup">
-        <Popup info="{info}" info_index="{info_index}"/>
-      </div>
-    {/if}
-  </div>
-</div>
+	<div class="popup-container">
+		<div class="icons">
+			<img src="{'https://aoe2techtree.net/img/'+
+				info.info_type.replace(/\S/, (s)=>s.toUpperCase())+'s/'+
+				info.info_list[info.info_list.length-1].id+
+				'.png' }"
+				on:touchstart={handleStart}
+				on:touchmove={handleMove}
+				on:touchend={handleEnd}
+				on:mouseenter={handleStart}
+				on:mousemove={handleMove}
+				on:mouseleave={handleEnd}
+				alt="unit pic"
+			>
+		</div>
+		<div class="row">
+			{#each Array(info.available) as _, i}
+				<div class="wbox"
+					on:mouseenter={() => show(i)}
+					on:mouseleave={hide}
+				>
+				</div>
+			{/each}
+			{#if show_info}
+				<div class="popup">
+					<Popup {info} {info_index}/>
+				</div>
+			{/if}
+		</div>
+	</div>
 </div>
 
 
@@ -72,7 +113,7 @@
     position: relative;
   }
   .popup {
-    bottom: 10px;
+    bottom: 3rem;
     position: absolute;
     z-index: 100;
     background-color: white;
