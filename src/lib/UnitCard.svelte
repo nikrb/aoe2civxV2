@@ -16,6 +16,7 @@
              '.png';
 
 	function handleStart(event) {
+		event.preventDefault();
 		image_bounds = event.target.getBoundingClientRect();
 		bottom_pos = image_bounds.top;
 		console.log("bottom_pos", bottom_pos);
@@ -31,6 +32,7 @@
 		return offsetX;
 	}
 	function handleMove(event) {
+		event.preventDefault();
 		if(!image_bounds) return;
 		const offsetX = getXOffset(event);
 		const index = Math.min(
@@ -43,6 +45,7 @@
 		show(index);
 	}
 	function handleEnd(event) {
+		event.preventDefault();
 		hide();
 		image_bounds = null;
 	}

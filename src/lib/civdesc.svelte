@@ -23,18 +23,21 @@
 	return {y_offset, x_offset};
   }
   const toggle = (event) => {
+	event.preventDefault();
     if( toggleClick){
 		const {y_offset, x_offset} = getOffsets(event);
 		show_unique = !show_unique;
 	}
   };
   const show = (event) => {
+	event.preventDefault();
     if( !toggleClick || event.touches){
 		const {y_offset, x_offset} = getOffsets(event);
 		show_unique = true;	
 	}
   };
   const hide = () => {
+	event.preventDefault();
     if( !toggleClick) show_unique = false;
   };
 
